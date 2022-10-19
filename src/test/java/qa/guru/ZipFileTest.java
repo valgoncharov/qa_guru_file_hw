@@ -40,7 +40,7 @@ public class ZipFileTest {
         ZipFile zf = new ZipFile(new File("src/test/resources/auto-test-guru.zip"));
         ZipInputStream is = new ZipInputStream((cl.getResourceAsStream("auto-test-guru.zip")));
         ZipEntry entry;
-        while ((entry = is.getNextEntry() != null)){
+        while ((entry = is.getNextEntry()) != null){
             if (entry.getName().contains("Bug report Stepik.xlsx")){
                 try (InputStream inputStream = zf.getInputStream(entry)){
                     XLS xls = new XLS(inputStream);
@@ -63,7 +63,7 @@ public class ZipFileTest {
         while ((entry = is.getNextEntry()) != null){
             if (entry.getName().contains("qa_test.csv")){
                 try (InputStream inputStream = zf.getInputStream(entry)){
-                    CSVReader reader = new CSVReader((new InputStreamReader(inputStream));
+                    CSVReader reader = new CSVReader(new InputStreamReader(inputStream));
                     List<String[]> content = reader.readAll();
                     String[] row = content.get(1);
                     assertThat(row[0]).isEqualTo("Valentine");
