@@ -78,19 +78,20 @@ public class FileParseTest {
         ZipInputStream is = new ZipInputStream(cl.getResourceAsStream("auto-test-guru.zip"));
         ZipEntry entry;
         while ((entry = is.getNextEntry()) != null) {
-                if (entry.getName().contains("ЧЛ ТРЕБОВАНИЙ.pdf")){
-                    try (InputStream inputStream = zf.getInputStream(entry)){
-                        PDF pdf = new PDF(inputStream);
-                        assertThat(pdf.text).contains("Синхронизация с системой 1С");
-                    }
+            if (entry.getName().contains("ЧЛ ТРЕБОВАНИЙ.pdf")) {
+                try (InputStream inputStream = zf.getInputStream(entry)) {
+                    PDF pdf = new PDF(inputStream);
+                    assertThat(pdf.text).contains("Синхронизация с системой 1С");
+                }
 
             }
 
-            }
+        }
+    }
 
         @DisplayName("Try read file")
         @Test
-        void readZipFileTeas() throws IOException{
+        void readZipFileTest() throws IOException{
             try {
                 FileInputStream fis = new FileInputStream("src/test/resources/auto-test-guru.zip");
                 ZipInputStream zis = new ZipInputStream(fis);
@@ -108,4 +109,6 @@ public class FileParseTest {
             }
         }
     }
-}
+
+
+
